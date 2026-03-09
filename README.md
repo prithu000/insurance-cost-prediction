@@ -1,147 +1,100 @@
-# Insurance Cost Prediction System
+# Insurance Cost Prediction & BMI Calculator (Flask + Machine Learning)
 
-A simple machine learning web application that predicts medical insurance costs based on user information.
-The model is trained using the **Medical Cost Personal Dataset** and deployed with **Flask**.
-
-This project demonstrates a complete machine learning workflow — from data preprocessing and model training to deploying the model through a web interface.
+A simple **Machine Learning web application** built with **Flask** that predicts medical insurance cost based on user inputs.
+The project also includes an additional **BMI Calculator tool** to help users understand their health metrics.
 
 ---
 
-## Project Overview
+## 🚀 Features
 
-Insurance companies estimate medical costs using various personal and health-related factors.
-This application allows users to input their details and receive an estimated insurance cost prediction.
-
-The prediction is generated using a **Linear Regression model trained with Scikit-Learn**.
-
----
-
-## Features
-
-* Predict insurance cost based on:
-
-  * Age
-  * BMI (Body Mass Index)
-  * Number of children
-  * Gender
-  * Smoker status
-
-* Simple web interface built with Flask
-
-* Machine learning model built using Scikit-Learn
-
-* Clean dark-themed UI with custom CSS
-
-* End-to-end ML pipeline demonstration
+* Predict **medical insurance cost** using a trained ML model
+* Built using **Flask backend**
+* Clean **HTML + CSS frontend**
+* **BMI Calculator** integrated in the same web app
+* Input validation and error handling
+* Dynamic prediction results
+* Simple and responsive UI
 
 ---
 
-## Tech Stack
+## 🧠 Machine Learning Model
 
-**Backend**
+The insurance cost prediction model uses the following features:
+
+* Age
+* BMI
+* Number of children
+* Smoking status
+* Gender
+
+The model was trained using the **Insurance dataset** and saved using **Pickle**.
+
+---
+
+## 🛠️ Tech Stack
 
 * Python
 * Flask
-
-**Machine Learning**
-
-* Scikit-Learn
+* Scikit-learn
 * Pandas
-* NumPy
-
-**Frontend**
-
 * HTML
 * CSS
+* Git & GitHub
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 insurance-cost-prediction
 │
-├── app.py                 # Flask application
-├── requirements.txt       # Python dependencies
-├── README.md              # Project documentation
-│
-├── data
-│   └── insurance.csv      # Dataset used for training
-│
+├── app.py
 ├── models
-│   └── model.pkl          # Trained ML model
+│   ├── model.pkl
+│   └── columns.pkl
+│
+├── static
+│   └── style.css
 │
 ├── templates
-│   └── index.html         # Web interface
+│   ├── index.html
+│   └── bmi.html
 │
-└── static
-    └── style.css          # Custom styling
+├── data
+│   └── insurance.csv
+│
+└── README.md
 ```
 
 ---
 
-## Machine Learning Workflow
+## ⚙️ Installation & Setup
 
-1. Load dataset
-2. Perform preprocessing and encoding
-3. Train Linear Regression model
-4. Evaluate model performance
-5. Save trained model using Pickle
-6. Deploy model using Flask
-7. Accept user input from web interface
-8. Generate prediction
-
----
-
-## Dataset
-
-The model is trained using the **Medical Cost Personal Dataset**, which contains information about:
-
-* Age
-* Gender
-* BMI
-* Children
-* Smoker status
-* Region
-* Insurance charges
-
-Target variable:
+Clone the repository:
 
 ```
-charges
+git clone https://github.com/prithu000/insurance-cost-prediction.git
 ```
 
-The model learns the relationship between these features and insurance cost.
-
----
-
-## How to Run the Project
-
-### 1. Clone the repository
-
-```
-git clone https://github.com/prithu0000/insurance-cost-prediction.git
-```
-
-### 2. Navigate to the project folder
+Go to the project folder:
 
 ```
 cd insurance-cost-prediction
 ```
 
-### 3. Install dependencies
+Install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
 
-### 4. Run the Flask application
+Run the Flask application:
 
 ```
 python app.py
 ```
 
-### 5. Open the application
+Open your browser and go to:
 
 ```
 http://127.0.0.1:5000
@@ -149,37 +102,29 @@ http://127.0.0.1:5000
 
 ---
 
-## Example Input
+## 📊 BMI Categories
 
-User enters:
-
-* Age: 35
-* BMI: 28
-* Children: 2
-* Gender: Male
-* Smoker: Yes
-
-The model returns a predicted insurance cost.
+| BMI Range   | Category    |
+| ----------- | ----------- |
+| < 18.5      | Underweight |
+| 18.5 – 24.9 | Normal      |
+| 25 – 29.9   | Overweight  |
+| ≥ 30        | Obese       |
 
 ---
 
-## Future Improvements
+## 💡 Future Improvements
 
-Possible improvements for the project:
-
-* Use advanced models (Random Forest / Gradient Boosting)
-* Add input validation
-* Add visual analytics dashboard
-* Deploy the application online
-* Implement a full ML pipeline using Scikit-Learn Pipeline
+* Deploy the project on **Render / Railway / AWS**
+* Add **user authentication**
+* Improve UI with **JavaScript animations**
+* Store prediction history in a database
+* Convert into a **REST API**
 
 ---
 
-## Author
+## 👨‍💻 Author
 
 **Prithu Maheshwari**
 
-BTech Computer Science Engineering student interested in
-Machine Learning, Data Science, and Backend Development.
-
----
+If you like this project, feel free to ⭐ the repository.
