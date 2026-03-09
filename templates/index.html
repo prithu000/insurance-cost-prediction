@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<body>
+
+<div class="container">
+
+<h1>Insurance Cost Prediction</h1>
+
+<form action="/predict" method="POST">
+
+<label>Age</label>
+<input type="number" name="age">
+
+<label>BMI</label>
+<input type="number" name="bmi">
+
+<label>Children</label>
+<input type="number" name="children">
+
+<label>Smoker</label>
+<select name="smoker">
+<option value="1">Yes</option>
+<option value="0">No</option>
+</select>
+
+<label>Gender</label>
+<select name="gender">
+<option value="1">Male</option>
+<option value="0">Female</option>
+</select>
+
+<button type="submit">Predict Cost</button>
+
+</form>
+
+{% if prediction_text %}
+<div class="result">
+{{ prediction_text }}
+</div>
+{% endif %}
+
+</div>
+
+</body>
