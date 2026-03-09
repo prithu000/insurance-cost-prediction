@@ -14,34 +14,64 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    age = int(request.form["age"])
-    bmi = float(request.form["bmi"])
-    children = int(request.form["children"])
-    smoker = int(request.form["smoker"])
-    gender =int(request.form["gender"])
+    try:
+        age = int(request.form["age"])
+        bmi = float(request.form["bmi"])
+        children = int(request.form["children"])
+        smoker = int(request.form["smoker"])
+        gender = int(request.form["gender"])
 
-    import pandas as pd
+        import pandas as pd
 
-    input_data = {
-    "age": age,
-    "bmi": bmi,
-    "children": children,
-    "sex_male": gender,
-    "smoker_yes": smoker
-    }
+        input_data = {
+            "age": age,
+            "bmi": bmi,
+            "children": children,
+            "sex_male": gender,
+            "smoker_yes": smoker
+        }
 
-    df = pd.DataFrame([input_data])
+        df = pd.DataFrame([input_data])
+        df = df.reindex(columns=columns, fill_value=0)
 
-    df = df.reindex(columns=columns, fill_value=0)
+        prediction = model.predict(df)[0]
 
-    prediction = model.predict(df)
+        return render_template(
+            "index.html",
+            prediction_text=f"Predicted Insurance Cost : $ {round(prediction,2)}"
+        )
 
-    prediction = max(0, prediction[0])
+    except Exception as e:
 
-    return render_template(
-        "index.html",
-        prediction_text=f"Predicted Insurance Cost: ${prediction:.2f}"
-    )
+        return render_template(
+            "index.html",
+            prediction_text=f"INVALID INPUT"
+        )
 
+@app.route("/bmii")
+def bmi():
+    return render_template("bmi.html")
+
+@app.route("/bmi", methods=["POST"])
+def calculate_bmi():
+    try:
+        weight = float(request.form["weight"])
+        height = float(request.form["height"])
+
+        bmi = weight / (height ** 2)
+
+        return render_template(
+            "bmi.html",
+            bmi_text=f"Calculated BMI : {round(bmi,2)}",
+            bmi=bmi
+        )
+
+    except :
+        return render_template(
+            "index.html", bmi=bmi,
+            bmi_text=f"INVALID INPUT"
+        )
+
+    
 if __name__ == "__main__":
     app.run(debug=True)

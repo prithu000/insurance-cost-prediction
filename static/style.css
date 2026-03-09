@@ -19,6 +19,7 @@ body{
     box-shadow:0 0 12px rgba(0,0,0,0.6);
 }
 
+
 /* Title */
 
 h1{
@@ -85,4 +86,26 @@ button:hover{
     border-radius:4px;
     color:#2ecc71;
     font-weight:600;
+}
+.back-link{color:#117a3c;
+    margin-top:15px;
+}
+.underweight{
+    color:#3498db;
+    font-weight:bold;
+}
+
+.normal{
+    color:#2ecc71;
+    font-weight:bold;
+}
+
+.overweight{
+    color:#f39c12;
+    font-weight:bold;
+}
+
+.obese{
+    color:#e74c3c;
+    font-weight:bold;
 }
