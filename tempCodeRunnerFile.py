@@ -35,7 +35,6 @@ def predict():
         df = df.reindex(columns=columns, fill_value=0)
 
         prediction = model.predict(df)[0]
-        
 
         return render_template(
             "index.html",
