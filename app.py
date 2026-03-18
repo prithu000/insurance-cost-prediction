@@ -1,19 +1,22 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 
+# load model
 model = pickle.load(open("models/model.pkl", "rb"))
 columns = pickle.load(open("models/columns.pkl", "rb"))
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
 @app.route("/predict", methods=["POST"])
 def predict():
-
     try:
         age = int(request.form["age"])
         bmi = float(request.form["bmi"])
@@ -21,8 +24,7 @@ def predict():
         smoker = int(request.form["smoker"])
         gender = int(request.form["gender"])
 
-        import pandas as pd
-
+        # input dictionary
         input_data = {
             "age": age,
             "bmi": bmi,
@@ -31,27 +33,34 @@ def predict():
             "smoker_yes": smoker
         }
 
+        # dataframe
         df = pd.DataFrame([input_data])
         df = df.reindex(columns=columns, fill_value=0)
 
+        # prediction
         prediction = model.predict(df)[0]
-        
+
+        # 🔥 FIX: prevent negative value
+        prediction = max(0, prediction)
 
         return render_template(
             "index.html",
-            prediction_text=f"Predicted Insurance Cost : $ {round(prediction,2)}"
+            prediction_text=f"Predicted Insurance Cost : $ {round(prediction, 2)}"
         )
 
     except Exception as e:
+        print("Error:", e)
 
         return render_template(
             "index.html",
-            prediction_text=f"INVALID INPUT"
+            prediction_text="INVALID INPUT"
         )
+
 
 @app.route("/bmii")
 def bmi():
     return render_template("bmi.html")
+
 
 @app.route("/bmi", methods=["POST"])
 def calculate_bmi():
@@ -63,16 +72,18 @@ def calculate_bmi():
 
         return render_template(
             "bmi.html",
-            bmi_text=f"Calculated BMI : {round(bmi,2)}",
+            bmi_text=f"Calculated BMI : {round(bmi, 2)}",
             bmi=bmi
         )
 
-    except :
+    except Exception as e:
+        print("Error:", e)
+
         return render_template(
-            "index.html", bmi=bmi,
-            bmi_text=f"INVALID INPUT"
+            "bmi.html",
+            bmi_text="INVALID INPUT"
         )
 
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
